@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model='ir.ui.view' id='lctt_wizard_form'>
+             <field name="name">wizard.lctt.history.form</field>
+            <field name="model">wizard.lctt.history</field>
+            <field name="arch" type="xml">
+                <form string="Wizard">
+                        <group string="lctt Report">
+                            <field name="date_from" string="Date from"/>
+                            <field name="date_to" string="Date To"/>
+                        </group>
+
+                    <footer>
+                        <button name="print_report_attendance" type="object" default_focus="1"
+                                string="Print LCTT Info" class="oe_highlight"
+                                icon="fa-download"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model='ir.actions.act_window' id='lctt_wizard_act'>
+            <field name="name">LCTT Report</field>
+            <field name="res_model">wizard.lctt.history</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="lctt_wizard_form"/>
+            <field name="target">new</field>
+        </record>
+        <report
+            id="lctt_xlsx"
+            model="wizard.lctt.history"
+            string=" "
+            report_type="qweb-pdf"
+            name="export_lctt_pdf.lctt_report"
+            file="export_lctt_pdf.lctt_report"
+
+        />
+        <!-- <menuitem name="Current stock in Excel" parent="stock.menu_warehouse_report" id="export_excel" action="wizard_act" sequence="3"/> -->
+        <menuitem name="LCTT Report"  id="lctt_excel" action="lctt_wizard_act"  parent="purchase.menu_purchase_control"/>
+    </data>
+</odoo>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <template id="lctt_report">
+         <t t-call="web.html_container">
+             <t t-call="web.external_layout">
+                 <div class="page">
+
+                    <div class="oe_structure"/>
+                      <div class="row">
+                        <div class="col-xs-12">
+                            <center style="margin-top:15px;"><strong  style="font-size:32px;">LC/TT Record</strong></center><br/>
+                        </div>
+                        <div class="col-xs-12">
+                            <center style="margin-top:15px;">
+                                <strong  style="font-size:22px;">Period From:
+                                <span style="font-size:22px;" t-esc="date_order2" t-options="{&quot;widget&quot;: &quot;date&quot;}"/></strong>
+                                <strong style="font-size:22px;">To
+                                <span style="font-size:22px;" t-esc="date_order" t-options="{&quot;widget&quot;: &quot;date&quot;}"/></strong>
+                            </center>
+                        </div>
+
+                      <br/> <br/> <br/> <br/> <br/> <br/>
+                     <div class="col-xs-12">
+                         <br/><br/><br/>
+               <table style="border:1px solid black;" class="table table-condensed">
+                <thead>
+                    <th width="5%" style="border:1px solid black;" class="text-center"><strong>PO No</strong></th>
+                    <th width="3%" style="border:1px solid black;" class="text-center"><strong>Ref No</strong></th>
+                    <th width="3%" style="border:1px solid black;" class="text-center"><strong>LC No</strong></th>
+                    <th width="5%" style="border:1px solid black;" class="text-center"><strong>Supplier</strong></th>
+                    <th width="5%" style="border:1px solid black;" class="text-center"><strong>Bank Names</strong></th>
+                    <th width="5%" style="border:1px solid black;" class="text-center"><strong>Condition</strong></th>
+                    <th width="5%" style="border:1px solid black;" class="text-center"><strong>Date</strong></th>
+                    <th width="3%" style="border:1px solid black;" class="text-center"><strong>Particular</strong></th>
+                    <th width="3%" style="border:1px solid black;" class="text-center"><strong>QTY</strong></th>
+                    <th width="3%" style="border:1px solid black;" class="text-center"><strong>Rate ($)</strong></th>
+                    <th width="3%" style="border:1px solid black;" class="text-center"><strong>Value ($)</strong></th>
+                    <th width="5%" style="border:1px solid black;" class="text-center"><strong>Ex. Rate</strong></th>
+                    <th width="5%" style="border:1px solid black;" class="text-center"><strong>Principle Account</strong></th>
+                    <th width="5%" style="border:1px solid black;" class="text-center"><strong>Insurrance</strong></th>
+                    <th width="5%" style="border:1px solid black;" class="text-center"><strong>Bank Charges</strong></th>
+                    <th width="5%" style="border:1px solid black;" class="text-center"><strong>Govt Tax/Duties</strong></th>
+                    <th width="5%" style="border:1px solid black;" class="text-center"><strong>Demerage</strong></th>
+                    <th width="5%" style="border:1px solid black;" class="text-center"><strong>Detensions</strong></th>
+                    <th width="5%" style="border:1px solid black;" class="text-center"><strong>Clearing</strong></th>
+                    <th width="5%" style="border:1px solid black;" class="text-center"><strong>Freight</strong></th>
+                    <th width="3%" style="border:1px solid black;" class="text-center"><strong>Net</strong></th>
+                    <th width="3%" style="border:1px solid black;" class="text-center"><strong>Cost</strong></th>
+                </thead>
+                <tbody>
+                   <t t-foreach="datacr" t-as="line">
+
+
+                       <t t-set="Net" t-value="0"/>
+                       <t t-set="Cost" t-value="0"/>
+                       <t t-set="insurance" t-value="0"/>
+                       <t t-set="Bank" t-value="0"/>
+                       <t t-set="Govt" t-value="0"/>
+                       <t t-set="Demer" t-value="0"/>
+                       <t t-set="Detens" t-value="0"/>
+                       <t t-set="Clear" t-value="0"/>
+                       <t t-set="Freig" t-value="0"/>
+                       <t t-set="sub_total" t-value="0"/>
+                       <t t-set="qualt" t-value="0"/>
+
+                       <t t-set="qualt1" t-value="0"/>
+                       <t t-set="sub_total1" t-value="0"/>
+                       <t t-set="Net1" t-value="0"/>
+                       <t t-set="Cost1" t-value="0"/>
+                       <t t-set="insurance1" t-value="0"/>
+                       <t t-set="Bank1" t-value="0"/>
+                       <t t-set="Govt1" t-value="0"/>
+                       <t t-set="Demer1" t-value="0"/>
+                       <t t-set="Detens1" t-value="0"/>
+                       <t t-set="Clear1" t-value="0"/>
+                       <t t-set="Freig1" t-value="0"/>
+                        <tr>
+                              <td width="5%" style=" border:1px solid black;">
+                                  <span t-esc="line['po_name']"/>
+                              </td>
+
+                               <td width="3%" style=" border:1px solid black;">
+                                 <span t-esc="line['ref-no']"/>
+                              </td>
+
+                              <td width="3%" style=" border:1px solid black;">
+                                 <span t-esc="line['lc_ref_no']"/>
+                              </td>
+
+                              <td width="5%" style=" border:1px solid black;">
+                                 <span t-esc="line['name']"/>
+                              </td>
+
+                              <td width="5%" style="border:1px solid black;">
+                                 <span t-esc="line['bank_name']"/>
+                              </td>
+
+                               <td width="5%" style="border:1px solid black;">
+                                 <span t-esc="line['condition']"/>
+                              </td>
+                               <td width="5%" style="border:1px solid black;">
+                                 <span t-esc="line['date']"/>
+                              </td>
+
+                               <td width="5%" style="border:1px solid black;">
+
+                                   <span t-esc="line['particular']"/>
+                               </td>
+
+                               <td width="3%" style="border:1px solid black;">
+<!--                                 <t t-foreach="line['qty']" t-as="qt">-->
+<!--                                   <t t-set="qualt1" t-value="qt"/>-->
+<!--                                    <t t-set="qualt" t-value="qualt + qualt1"/>-->
+
+<!--                                 </t>-->
+                                   <span t-esc="line['qty']"/>
+                               </td>
+
+                              <td width="3%" style="border:1px solid black;">
+<!--                                 <t t-foreach="line['rate']" t-as="rat">-->
+<!--                                    <span t-esc="rat"/>-->
+<!--                                 </t>-->
+                                  <span t-esc="line['rate']"/>
+                              </td>
+
+                              <td width="3%" style="border:1px solid black;">
+<!--                                 <t t-foreach="line['value']" t-as="val">-->
+<!--                                  <span t-esc="val"/>-->
+<!--                                 </t>-->
+                                  <span t-esc="line['value']"/>
+                              </td>
+
+                              <td width="3%" style="border:1px solid black;">
+
+                                  <span t-esc="line['fx_rate']"/>
+
+                              </td>
+
+
+                              <td width="5%" style="border:1px solid black;">
+<!--                                 <t t-foreach="line['sub_total_lp']" t-as="sb">-->
+<!--                                    <t t-set="sub_total1" t-value="sb"/>-->
+<!--                                    <t t-set="sub_total" t-value="sub_total + sub_total1"/>-->
+<!--                                 </t>-->
+                                  <span t-esc="'{:,.2f}'.format(line['sub_total_lp'])"/>
+
+                              </td>
+
+                               <td width="5%" style="border:1px solid black;">
+<!--                                   <t t-foreach="line['rate']" t-as="r">-->
+<!--                                        <t t-set="insurance1" t-value="line['Insurance'] * r"/>-->
+<!--                                        <t t-set="insurance" t-value="insurance + insurance1"/>-->
+<!--                                   </t>-->
+                                   <t t-set="insurance1" t-value="line['Insurance'] * line['sub_total_lp']"/>
+                                   <span t-esc="'{:,.2f}'.format(insurance1)"/>
+<!--                                   <span t-esc="insurance"/>-->
+                               </td>
+                                <td width="5%" style="border:1px solid black;">
+<!--                                    <t t-foreach="line['rate']" t-as="r">-->
+<!--                                        <t t-set="Bank1" t-value="line['Bank Charges'] * line['rate']"/>-->
+<!--                                        <t t-set="Bank" t-value="Bank + Bank1"/>-->
+<!--                                    </t>-->
+                                    <t t-set="Bank" t-value="line['Bank Charges'] * line['sub_total_lp']"/>
+                                    <span t-esc="'{:,.2f}'.format(Bank1)"/>
+<!--                                    <span t-esc="Bank"/>-->
+                                </td>
+                                <td width="5%" style="border:1px solid black;">
+<!--                                    <t t-foreach="line['rate']" t-as="r">-->
+<!--                                        <t t-set="Govt1" t-value="line['Govt Tax/Duties'] * r"/>-->
+<!--                                        <t t-set="Govt" t-value="Govt + Govt1"/>-->
+<!--                                    </t>-->
+                                    <t t-set="Govt1" t-value="line['Govt Tax/Duties'] * line['sub_total_lp']"/>
+                                    <span t-esc="'{:,.2f}'.format(Govt1)"/>
+<!--                                    <span t-esc="Govt"/>-->
+                                </td>
+                                <td width="5%" style="border:1px solid black;">
+<!--                                    <t t-foreach="line['rate']" t-as="r">-->
+<!--                                        <t t-set="Demer1" t-value="line['Demerage'] * r"/>-->
+<!--                                        <t t-set="Demer" t-value="Demer + Demer1"/>-->
+<!--                                    </t>-->
+                                    <t t-set="Demer1" t-value="line['Demerage'] * line['sub_total_lp']"/>
+                                    <span t-esc="'{:,.2f}'.format(Demer1)"/>
+<!--                                    <span t-esc="Demer"/>-->
+                                </td>
+                                <td width="5%" style="border:1px solid black;">
+<!--                                    <t t-foreach="line['rate']" t-as="r">-->
+<!--                                        <t t-set="Detens1" t-value="line['Detensions'] * r"/>-->
+<!--                                        <t t-set="Detens" t-value="Detens + Detens1"/>-->
+<!--                                    </t>-->
+                                    <t t-set="Detens1" t-value="line['Detensions'] * line['sub_total_lp']"/>
+                                    <span t-esc="'{:,.2f}'.format(Detens1)"/>
+<!--                                    <span t-esc="Detens"/>-->
+                                </td>
+                                <td width="5%" style="border:1px solid black;">
+<!--                                    <t t-foreach="line['rate']" t-as="r">-->
+<!--                                        <t t-set="Clear1" t-value="line['Clearing'] * r"/>-->
+<!--                                        <t t-set="Clear" t-value="Clear + Clear1"/>-->
+<!--                                    </t>-->
+                                    <t t-set="Clear1" t-value="line['Clearing'] * line['sub_total_lp']"/>
+                                    <span t-esc="'{:,.2f}'.format(Clear1)"/>
+<!--                                    <span t-esc="Clear"/>-->
+                                </td>
+                                <td width="5%" style="border:1px solid black;">
+<!--                                    <t t-foreach="line['rate']" t-as="r">-->
+<!--                                        <t t-set="Freig1" t-value="line['Freight'] * r"/>-->
+<!--                                        <t t-set="Freig" t-value="Freig + Freig1"/>-->
+<!--                                    </t>-->
+                                    <t t-set="Freig1" t-value="line['Freight'] * line['sub_total_lp']"/>
+                                    <span t-esc="'{:,.2f}'.format(Freig1)"/>
+<!--                                    <span t-esc="Freig"/>-->
+                                </td>
+                                <td width="3%" style="border:1px solid black;">
+
+                                        <t t-set="Net1" t-value="line['sub_total_lp'] + insurance1 + Bank1 + Govt1 + Demer1 + Detens1 + Clear1 + Freig1"/>
+                                        <t t-set="Net" t-value="Net + Net1"/>
+
+                                    <span t-esc="'{:,.2f}'.format(Net)"/>
+<!--                                    <span t-esc="Net"/>-->
+                                </td>
+                                <td width="3%" style="border:1px solid black;">
+<!--                                    <t t-foreach="line['qty']" t-as="qty">-->
+                                        <t t-set="Cost1" t-value="Net/line['qty']"/>
+<!--                                        <t t-set="Cost" t-value="Cost + Cost1"/>-->
+<!--                                    </t>-->
+                                    <span t-esc="'{:,.2f}'.format(Cost1)"/>
+<!--                                    <span t-esc="Cost"/>-->
+                                </td>
+
+                        </tr>
+                   </t>
+
+                </tbody>
+               </table>
+            </div>
+
+            </div>
+
+        </div>
+        </t>
+      </t>
+    </template>
+</odoo>
+
+<!-- <t t-set="bank" t-value="line['Bank Charges'] * line['rate']"/>-->
+<!--                              <span t-esc="bank"/>-->
+<!--                             <t t-set="insurance" t-value="line['Insurance'] * line['rate']"/>-->
+<!--                               <span t-esc="insurance"/>-->
